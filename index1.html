@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    /*Задание1
+    Создайте страницу, которую пользователь может персона
+    лизировать. На странице должен находиться выпадающий список с 
+    названиями цветов и поле ввода, в которое можно будет
+    ввести только целочисленное значение. При нажатии на кнопку
+    сохранить, цвет выбранный в выпадающем списке должен быть 
+    присвоен фону странице, а целочисленное значение из поля ввода
+    должно использоваться для изменения размера шрифта на странице
+    Выбранные настройки должны сохраниться в cookie набор и при
+    повторном заходе пользователя на странице настройки должны 
+    восстановиться.
+    */
+    </script>
+    <style>
+    </style>
+    <script>
+        window.onload = function(){
+            var select = document.getElementById("colorSelect");
+            var main = document.getElementById("main");
+            var savebtn = document.getElementById("save");
+            var font = document.getElementById("fontSize");
+
+            var savedColor = findCookieValue("color");
+            if(savedColor){
+                main.style.backgroundColor = savedColor; 
+            }
+
+            var savedFont = findCookieValue("fontSize");
+            if(savedFont){
+                main.style.fontSize =savedFont +"px";
+            }
+
+
+            function findCookieValue(cookieName) {
+                var allcookies = document.cookie;
+                var pos = allcookies.indexOf(cookieName + "=");
+
+                if (pos != -1) {
+                    var start = pos + cookieName.length + 1;
+                    var end = allcookies.indexOf(";", start);
+
+                    if (end == -1) end = allcookies.length;
+
+                    var value = allcookies.substring(start, end);
+                    value = decodeURIComponent(value);
+                    return value;
+                }
+            }
+
+            
+            savebtn.addEventListener("click", function(){
+                var color = select.options.selectedIndex;
+                var currentColor;
+
+                function setCookie(){
+                    document.cookie = "color ="+ currentColor ;
+                    document.cookie = "fontSize ="+font.value;
+                }
+
+                if(color != 0){
+                    
+                    if(color == "1"){
+                        currentColor = "lightgreen";
+                        main.style.backgroundColor = currentColor; 
+                    }
+                    if(color == "2"){
+                        currentColor = "lightblue";
+                        main.style.backgroundColor = currentColor; 
+                    }
+                    if(color == "3"){
+                        currentColor = "lightgray";
+                        main.style.backgroundColor = currentColor; 
+                    }
+                    // switch(color){
+                    //     case "0": main.style.backgroundColor = "white"; break;
+                    //     case "1": main.style.backgroundColor = "lightgreen"; break;
+                    //     case "2": main.style.backgroundColor = "lightblue"; break;
+                    //     case "3": main.style.backgroundColor = "lightgray"; break;
+                    // }
+                }
+                else main.style.backgroundColor = "white";
+                
+                if(font.value != 0){
+                    console.log(font.value);
+                    main.style.fontSize = font.value +"px";
+                }
+                setCookie();
+            })
+        }
+    </script>
+</head>
+<body id="main">
+    <div>
+        <select name="" id="colorSelect" >
+            <option value="" selected = "selected">Choose color</option>
+            <option value="lightgreen">lightgreen</option>
+            <option value="lightblue">lightblue</option>
+            <option value="lightgray">lightgray</option>
+        </select>
+        <input type="text" id="fontSize">
+        <input type="button" id="save" value="Save">
+    </div>
+    <div>
+        <h1>Sample Text</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro fugiat facilis, mollitia quia nesciunt voluptatem. Non sunt possimus neque nobis. Animi voluptatem exercitationem odio cum vel asperiores optio delectus porro.
+            Officia labore iusto ex, nisi aperiam nobis omnis autem perspiciatis, blanditiis, a nam voluptatibus. Modi quasi suscipit tenetur nostrum dicta, iure impedit repellendus. Deleniti libero quibusdam impedit obcaecati tempore cum.
+            Magni optio repellendus sit reiciendis architecto, et neque, cumque labore omnis, accusamus debitis? Labore, quia adipisci eius excepturi non ex totam corrupti, nihil earum, laboriosam quis in illum ipsa deserunt?
+            Illum ab magnam, dolorum voluptatem maxime eius architecto placeat quo necessitatibus commodi neque voluptate laborum! Culpa, asperiores vitae dolore, perferendis reiciendis quibusdam voluptas, quidem sapiente adipisci sint sit quia minima!
+            Sequi molestias soluta sunt odit tenetur nostrum dolore voluptatem. Adipisci, quam ipsam illum rerum inventore repudiandae dignissimos ad similique voluptatum iste vitae voluptas dolorem! Pariatur dolore tenetur rerum perferendis provident!
+            Necessitatibus odio soluta facere reiciendis fugiat, ducimus, alias blanditiis modi vel quaerat aut! Aspernatur minima corporis praesentium dicta exercitationem numquam fugiat quaerat explicabo saepe, voluptate, excepturi magni. Ipsa, quasi quae.
+            Corrupti, aspernatur. Sequi repudiandae molestiae nobis animi eligendi rerum, velit, eum cupiditate voluptatum, hic excepturi soluta doloribus! Ipsa delectus, nulla laudantium dolorem, qui quaerat, cupiditate tempore accusamus atque voluptates labore?
+            Iure praesentium quo deleniti perferendis, expedita explicabo aliquam laboriosam dolore cum! Eum est vitae assumenda tempora excepturi, officia eius atque repudiandae quo sapiente explicabo maiores. Corrupti tempora ipsum quidem et.
+            Nostrum placeat iure animi autem? Eligendi eius nesciunt, sapiente ratione mollitia laborum beatae iste odit itaque blanditiis eveniet nulla esse velit rem voluptatibus doloremque at deserunt accusamus cupiditate similique perferendis!
+            Vitae sed beatae reiciendis cum iure voluptas, doloremque maxime velit facilis qui similique unde magni illo ipsam eum veniam distinctio, optio repudiandae a obcaecati ab rem placeat. Aliquid, neque nostrum!
+        </p>
+    </div>
+</body>
+</html>
